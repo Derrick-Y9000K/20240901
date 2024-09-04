@@ -7,7 +7,7 @@ mm39 genome: https://ftp.ensembl.org/pub/release-112/fasta/mus_musculus/dna/Mus_
 mm39 gtf: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M35/gencode.vM35.chr_patch_hapl_scaff.annotation.gtf.gz <br>
 
 
-# 1. RNAseq
+## 1. RNAseq
 - environment construction
 Use anaconda to create a new environment with python=3.7. <br>
 Install fastqc (v0.11.9) and multiqc (v1.13) via anaconda if necessary. <br>
@@ -22,7 +22,7 @@ Place all raw sequencing files under /run_directory/fastq. <br>
 Run script: `bash RNAseq.sh -p ${num_threads} -d /run_directory -r mm39` <br>
 
 
-# 2. RNA-TE
+## 2. RNA-TE
 - environment construction
 Can use the same environment as RNAseq after TEtranscripts installed. <br>
 Install TEtranscripts (v2.2.3) from github (https://github.com/mhammell-laboratory/TEtranscripts/). <br>
@@ -33,7 +33,7 @@ Place all raw sequencing files under /run_directory/fastq. <br>
 Run script: `bash TEcount.sh -p ${num_threads} -d /run_directory -r mm39` <br>
 
 
-# 3. PCA
+## 3. PCA
 - environment construction
 packages: python (v3.10), numpy (v1.26.4), pandas (v2.2.2), scikit-learn (v1.5.1), matplotlib (v3.8.4), adjustText (v0.7.3). <br>
 
@@ -41,11 +41,11 @@ packages: python (v3.10), numpy (v1.26.4), pandas (v2.2.2), scikit-learn (v1.5.1
 Provide infile and outfile filename and run the cell. <br>
 
 
-# 4. PCA-3D
+## 4. PCA-3D
 - to do
 
 
-# 5. ATAC-seq/CUTtag
+## 5. ATAC-seq/CUTtag
 - environment construction
 Install trim_galore (v0.6.6) and bowtie2 (v2.4.4) via apt. <br>
 Install samtools (v1.13), bamCoverage (v3.5.4) and macs2 (v2.2.9.1) via anaconda. <br>
@@ -59,7 +59,7 @@ Place raw sequencing files of each sample under separate directory. <br>
 Run script: `bash cutandtag_mm39.sh` <br>
 
 
-# 6. DNA methylation
+## 6. DNA methylation
 - environment construction
 Use anaconda to create a new environment with python=2.7. <br>
 Install fastqc (v0.11.9) and multiqc (v1.13) via anaconda if necessary. <br>
@@ -74,7 +74,7 @@ Place all raw sequencing files under /run_directory/fastq. <br>
 Run script: `bash call_methylation.sh -p ${num_threads} -d /run_directory -r mm39 -b 500` <br>
 
 
-# 7. scRNA-seq
+## 7. scRNA-seq
 - environment construction
 Install cellranger (v7.2.0) from official website (https://support.10xgenomics.com/single-cell-gene-expression/software/overview/welcome). <br>
 packages: ggplot2 (), dplyr (), Seurat (), tidyr (), paletteer (). <br>
