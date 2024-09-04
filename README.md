@@ -30,7 +30,7 @@ TE gtf is downloaded from https://labshare.cshl.edu/shares/mhammelllab/www-data/
 
 ## script run
 Place all raw sequencing files under /run_directory/fastq. <br>
-Run script: bash TEcount.sh -p ${num_threads} -d /run_directory -r mm39 <br>
+Run script: `bash TEcount.sh -p ${num_threads} -d /run_directory -r mm39` <br>
 
 
 # 3. PCA
@@ -56,7 +56,7 @@ Use bowtie2-build to build reference index under /path/to/bowtie2/reference. <br
 
 ## script run
 Place raw sequencing files of each sample under separate directory. <br>
-Run script: bash cutandtag_mm39.sh <br>
+Run script: `bash cutandtag_mm39.sh` <br>
 
 
 # 6. DNA methylation
@@ -71,7 +71,7 @@ Use bs_seeker2-build.py to build reference index under /path/to/reference. <br>
 
 ## script run
 Place all raw sequencing files under /run_directory/fastq. <br>
-Run script: bash call_methylation.sh -p ${num_threads} -d /run_directory -r mm39 -b 500 <br>
+Run script: `bash call_methylation.sh -p ${num_threads} -d /run_directory -r mm39 -b 500` <br>
 
 
 # 7. scRNA-seq
@@ -82,5 +82,5 @@ packages: ggplot2 (), dplyr (), Seurat (), tidyr (), paletteer (). <br>
 ## script run
 Place all raw sequencing files under /run_directory/data and cd /run_directory. <br>
 Rename all the files in [sample Name]_S1_L00[Lane Number]_[Read Type]_001.fastq.gz format. <br>
-Run upstream analysis: cellranger count --id=$sample --localcores=16 --transcriptome=$db --fastqs=./data --sample=$sample --nosecondary --expect-cells=5000 <br>
+Run upstream analysis: `cellranger count --id=$sample --localcores=16 --transcriptome=$db --fastqs=./data --sample=$sample --nosecondary --expect-cells=5000` <br>
 Run downstream analysis: use ${sample}/outs/filtered_feature_bc_matrix/ to conduct downstream analysis with singlecell_downstream.R. <br>
