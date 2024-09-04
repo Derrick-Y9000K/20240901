@@ -1,10 +1,10 @@
 # G4TotiSC
 
-Except for specific introduction, all reference genomde are downloaded from Ensembl database (http://asia.ensembl.org/index.html), while reference gtf are downloaded from Gencode database (https://www.gencodegenes.org/).
-hg38 genome: https://ftp.ensembl.org/pub/release-112/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
-hg38 gtf: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/gencode.v46.chr_patch_hapl_scaff.annotation.gtf.gz
-mm39 genome: https://ftp.ensembl.org/pub/release-112/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz
-mm39 gtf: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M35/gencode.vM35.chr_patch_hapl_scaff.annotation.gtf.gz
+Except for specific introduction, all reference genomde are downloaded from Ensembl database (http://asia.ensembl.org/index.html), while reference gtf are downloaded from Gencode database (https://www.gencodegenes.org/). <br>
+hg38 genome: https://ftp.ensembl.org/pub/release-112/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz <br>
+hg38 gtf: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/gencode.v46.chr_patch_hapl_scaff.annotation.gtf.gz <br>
+mm39 genome: https://ftp.ensembl.org/pub/release-112/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz <br>
+mm39 gtf: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M35/gencode.vM35.chr_patch_hapl_scaff.annotation.gtf.gz <br>
 
 
 # 1. RNAseq
