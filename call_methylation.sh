@@ -10,6 +10,7 @@ gzip=0
 thread=32
 block_size=16000000
 bin_size=100000
+refdir="/path/to/reference"
 tmpdir="/tmp"
 fifo="multithread_processing"
 
@@ -60,12 +61,12 @@ if [ -d $dir ]; then
 
 	case $reference in
 	hg38)
-		index="/utility/BSseeker2/bs_utils/reference_genomes/hg38.fa_bowtie2/"
-		reference="/utility/BSseeker2/bs_utils/reference_genomes/hg38.fa"
+		index="${refdir}/hg38.fa_bowtie2/"
+		reference="${refdir}/hg38.fa"
 	;;
 	mm39)
-		index="/utility/BSseeker2/bs_utils/reference_genomes/mm39.fa_bowtie2/"
-		reference="/utility/BSseeker2/bs_utils/reference_genomes/mm39.fa"
+		index="${refdir}/mm39.fa_bowtie2/"
+		reference="${refdir}/mm39.fa"
 	;;
 	*)
 		echo "unrecognized reference genome $reference; must be one of hg38, mm39!"

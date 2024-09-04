@@ -11,6 +11,8 @@ gzip=0
 thread=12
 fifo="multithread_processing"
 retain=0
+reference_dir="/path/to/reference"
+gtf_dir="/path/to/gtf"
 reference="hg38"
 output=""
     
@@ -69,15 +71,15 @@ if [ -d $dir ]; then
     case $reference in
     hg38)
         echo "Reference: hg38"
-        reference_index="/utility/reference/RNAseq/hg38-TE/Homo_sapiens.GRCh38.TE_tran"
-        reference_gtf="/utility/reference/gtf/Homo_sapiens.GRCh38.chrN.gtf"
-        TE_gtf="/utility/reference/gtf/Homo_sapiens.GRCh38.TE.chrN.gtf"
+        reference_index="${reference_dir}/hg38-TE/Homo_sapiens.GRCh38.TE_tran"
+        reference_gtf="${gtf_dir}/Homo_sapiens.GRCh38.chrN.gtf"
+        TE_gtf="${gtf_dir}/Homo_sapiens.GRCh38.TE.chrN.gtf"
     ;;
     mm39)
         echo "Reference: mm39"
-        reference_index="/utility/reference/RNAseq/mm39-TE/Mus_musculus.GRCm39.TE_tran"
-        reference_gtf="/utility/reference/gtf/Mus_musculus.GRCm39.chrN.gtf"
-        TE_gtf="/utility/reference/gtf/Mus_musculus.GRCm39.TE.chrN.gtf"
+        reference_index="${reference_dir}/mm39-TE/Mus_musculus.GRCm39.TE_tran"
+        reference_gtf="${gtf_dir}/Mus_musculus.GRCm39.chrN.gtf"
+        TE_gtf="${gtf_dir}/Mus_musculus.GRCm39.TE.chrN.gtf"
     ;;
     *)
         echo "unrecognized reference genome $reference; must be one of hg38, mm39!"
@@ -353,8 +355,8 @@ if [ -d $dir ]; then
     elif [[ -d $dir/quantity ]]; then 
         echo $(date "+%Y-%m-%d %H:%M:%S") "postprocess started"
 
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Running: python /utility/anaconda/envs/RNAseq/bin/TE_count_merge.py --input-directory \$wd/quantity/ --output-directory \$wd/result/"
-        python /utility/anaconda/envs/RNAseq/bin/TE_count_merge.py --input-directory $dir/quantity/ --output-directory $dir/result/
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Running: python TE_count_merge.py --input-directory \$wd/quantity/ --output-directory \$wd/result/"
+        python TE_count_merge.py --input-directory $dir/quantity/ --output-directory $dir/result/
 
         mv $dir/result/TE_count.csv $dir/result/${output}_TE_count.csv
         mv $dir/result/TE_count.txt $dir/result/${output}_TE_count.txt

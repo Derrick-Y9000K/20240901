@@ -1,13 +1,9 @@
-directory = '/path/to/matrix/'
+directory = '/path/to/expression/matrix/'
 setwd(directory)
 
 library(ggplot2)
 library(dplyr)
 library(Seurat)
-# BiocManager::install("SingleR")
-library(SingleR)
-# BiocManager::install("celldex")
-library(celldex)
 
 scdata <- Read10X(data.dir = './data')
 scdata <- CreateSeuratObject(counts = scdata, project = 'G4TotiSC')
@@ -28,16 +24,8 @@ scdata <- FindClusters(scdata, resolution = 0.63)
 scdata.markers <- FindAllMarkers(scdata, only.pos = TRUE, min.pct = 0.25)
 write.csv(scdata.markers, file = './18cluster_marker.csv', na = ' ')
 
-sce <- GetAssayData(scdata, slot = 'data')
-ref.se <- MouseRNAseqData()
-pred <- SingleR(
-  test = sce, ref = ref.se, labels = ref$label.main, 
-  method = 'cluster', clusters = scdata@meta.data$seurat_clusters, 
-  assay.type.test = 'logcounts', assay.type.ref = 'logcounts'
-)
-
-scdata <- RunTSNE(scdata, dims = 1:10)
-DimPlot(scdata, reduction = 'tsne', label = TRUE) + NoLegend()
+# scdata <- RunTSNE(scdata, dims = 1:10)
+# DimPlot(scdata, reduction = 'tsne', label = TRUE) + NoLegend()
 scdata <- RunUMAP(scdata, dims = 1:10)
 DimPlot(scdata, reduction = 'umap', label = TRUE) + NoLegend()
 

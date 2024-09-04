@@ -13,6 +13,7 @@ gzip=0
 thread=12
 fifo="multithread_processing"
 retain=0
+reference_dir="/path/to/reference"
 reference="hg38"
 output=""
     
@@ -78,42 +79,30 @@ if [ -d $dir ]; then
     case $reference in
     hg38)
         echo "Reference: hg38"
-        echo "directory: /utility/reference/RNAseq/hg38/"
-        reference_gtf="/utility/reference/RNAseq/hg38/Homo_sapiens.GRCh38.107.chr.gtf"
-        reference_index="/utility/reference/RNAseq/hg38/Homo_sapiens.GRCh38_tran"
-    ;;
-    hg38-TE)
-        echo "Reference: hg38"
-        echo "directory: /utility/reference/RNAseq/hg38-TE/"
-        reference_gtf="/utility/reference/RNAseq/hg38-TE/Homo_sapiens.GRCh38.TE.chrN.gtf"
-        reference_index="/utility/reference/RNAseq/hg38-TE/Homo_sapiens.GRCh38.TE_tran"
+        echo "directory: ${reference_dir}/hg38/"
+        reference_gtf="${reference_dir}/hg38/Homo_sapiens.GRCh38.107.chr.gtf"
+        reference_index="${reference_dir}/hg38/Homo_sapiens.GRCh38_tran"
     ;;
     mm39)
         echo "Reference: mm39"
-        echo "directory: /utility/reference/RNAseq/mm39/"
-        reference_gtf="/utility/reference/RNAseq/mm39/Mus_musculus.GRCm39.107.chr.gtf"
-        reference_index="/utility/reference/RNAseq/mm39/Mus_musculus.GRCm39_tran"
-    ;;
-    mm39-TE)
-        echo "Reference: mm39-TE"
-        echo "directory: /utility/reference/RNAseq/mm39-TE/"
-        reference_gtf="/utility/reference/RNAseq/mm39-TE/Mus_musculus.GRCm39.TE.chrN.gtf"
-        reference_index="/utility/reference/RNAseq/mm39-TE/Mus_musculus.GRCm39.TE_tran"
+        echo "directory: ${reference_dir}/mm39/"
+        reference_gtf="${reference_dir}/mm39/Mus_musculus.GRCm39.107.chr.gtf"
+        reference_index="${reference_dir}/mm39/Mus_musculus.GRCm39_tran"
     ;;
     mm39-MuERV)
         echo "Reference: mm39-MuERV"
-        echo "directory: /utility/reference/RNAseq/mm39-MuERV/"
-        reference_gtf="/utility/reference/RNAseq/mm39-MuERV/Mus_musculus.GRCm39.MuERV.chrN.gtf"
-        reference_index="/utility/reference/RNAseq/mm39-MuERV/Mus_musculus.GRCm39.MuERV_tran"
+        echo "directory: ${reference_dir}/mm39-MuERV/"
+        reference_gtf="${reference_dir}/mm39-MuERV/Mus_musculus.GRCm39.MuERV.chrN.gtf"
+        reference_index="${reference_dir}/mm39-MuERV/Mus_musculus.GRCm39.MuERV_tran"
     ;;
     tdTamato)
         echo "Reference: tdTamato"
-        echo "directory: /utility/reference/RNAseq/tdTamato/"
-        reference_gtf="/utility/reference/RNAseq/tdTamato/tdTamato.gtf"
-        reference_index="/utility/reference/RNAseq/tdTamato/tdTamato_tran"
+        echo "directory: ${reference_dir}/tdTamato/"
+        reference_gtf="${reference_dir}/tdTamato/tdTamato.gtf"
+        reference_index="${reference_dir}/tdTamato/tdTamato_tran"
     ;;
     *)
-        echo "unrecognized reference genome $reference; must be one of hg38, hg38-TE, mm39, mm39-TE, mm39-MuERV, tdTamato!"
+        echo "unrecognized reference genome $reference; must be one of hg38, mm39, mm39-MuERV, tdTamato!"
         exit 1
     ;;
     esac
@@ -509,25 +498,17 @@ if [ -d $dir ]; then
             echo $(date "+%Y-%m-%d %H:%M:%S") "Running: prepDE.py -i \$wd/quantity/sample.txt -g \$wd/result/${output}_gene_count_matrix.csv -t \$wd/result/${output}_transcript_count_matrix.csv"
             prepDE.py -i $dir/quantity/sample.txt -g $dir/result/${output}_gene_count_matrix.csv -t $dir/result/${output}_transcript_count_matrix.csv
             echo $(date "+%Y-%m-%d %H:%M:%S") "Running: python /utility/anaconda/envs/RNAseq/bin/gene_count_filter.py --input $dir/result/${output}_gene_count_matrix.csv --output $dir/result/${output}_gene_count_matrix_filtered.txt"
-            python /utility/anaconda/envs/RNAseq/bin/gene_count_filter.py --input $dir/result/${output}_gene_count_matrix.csv --output $dir/result/${output}_gene_count_matrix_filtered.txt
+            python gene_count_filter.py --input $dir/result/${output}_gene_count_matrix.csv --output $dir/result/${output}_gene_count_matrix_filtered.txt
         fi
 
-        case $reference in
-        mm39-TE)
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Running: python /utility/anaconda/envs/RNAseq/bin/merge.py --directory \$wd/result --input ${output}_transcript_count_matrix.csv --output merged_transcript_counts.csv"
-            python /utility/anaconda/envs/RNAseq/bin/merge.py --directory $dir/result --input ${output}_transcript_count_matrix.csv --output merged_transcript_counts.csv
-        ;;
-        *)
-            if [ -z "$gene_length" ]; then
-                echo $(date "+%Y-%m-%d %H:%M:%S") "Running: GetGeneLength --database ensembl --gtffile $reference_gtf --lengthfile \$wd/result/gene_length.txt >/dev/null 2>&1"
-                GetGeneLength --database ensembl --gtffile $reference_gtf --lengthfile $dir/result/gene_length.txt >/dev/null 2>&1
-                gene_length=$dir/result/gene_length.txt
-            fi
+        if [ -z "$gene_length" ]; then
+            echo $(date "+%Y-%m-%d %H:%M:%S") "Running: GetGeneLength --database ensembl --gtffile $reference_gtf --lengthfile \$wd/result/gene_length.txt >/dev/null 2>&1"
+            GetGeneLength --database ensembl --gtffile $reference_gtf --lengthfile $dir/result/gene_length.txt >/dev/null 2>&1
+            gene_length=$dir/result/gene_length.txt
+        fi
 
-            echo $(date "+%Y-%m-%d %H:%M:%S") "Running: python /utility/anaconda/envs/RNAseq/bin/normalization.py --directory \$wd/result --input ${output}_gene_count_matrix.csv --length $gene_length --rpkm-result ${output}_rpkm_gene_count.csv --tpm-result ${output}_tpm_gene_count.csv"
-            python /utility/anaconda/envs/RNAseq/bin/normalization.py --directory $dir/result --input ${output}_gene_count_matrix.csv --length $gene_length --rpkm-result ${output}_rpkm_gene_count.csv --tpm-result ${output}_tpm_gene_count.csv
-        ;;
-        esac
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Running: python normalization.py --directory \$wd/result --input ${output}_gene_count_matrix.csv --length $gene_length --rpkm-result ${output}_rpkm_gene_count.csv --tpm-result ${output}_tpm_gene_count.csv"
+        python normalization.py --directory $dir/result --input ${output}_gene_count_matrix.csv --length $gene_length --rpkm-result ${output}_rpkm_gene_count.csv --tpm-result ${output}_tpm_gene_count.csv
 
         echo $(date "+%Y-%m-%d %H:%M:%S") "postprocess finished"
     else
@@ -548,11 +529,11 @@ if [ -d $dir ]; then
     elif [[ -d $dir/result ]]; then 
         echo $(date "+%Y-%m-%d %H:%M:%S") "principal component analysis started"
 
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Running: python /utility/anaconda/envs/RNAseq/bin/pca_analysis.py --directory \$wd/result --input ${output}_rpkm_gene_count.csv --separator , --output ${output}_rpkm_result.png"
-        python /utility/anaconda/envs/RNAseq/bin/pca_analysis.py --directory $dir/result --input ${output}_rpkm_gene_count.csv --separator , --output ${output}_rpkm_result.png
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Running: python pca_analysis.py --directory \$wd/result --input ${output}_rpkm_gene_count.csv --separator , --output ${output}_rpkm_result.png"
+        python pca_analysis.py --directory $dir/result --input ${output}_rpkm_gene_count.csv --separator , --output ${output}_rpkm_result.png
 
-        echo $(date "+%Y-%m-%d %H:%M:%S") "Running: python /utility/anaconda/envs/RNAseq/bin/pca_analysis.py --directory \$wd/result --input ${output}_tpm_gene_count.csv --separator , --output ${output}_tpm_result.png"
-        python /utility/anaconda/envs/RNAseq/bin/pca_analysis.py --directory $dir/result --input ${output}_tpm_gene_count.csv --separator , --output ${output}_tpm_result.png
+        echo $(date "+%Y-%m-%d %H:%M:%S") "Running: python pca_analysis.py --directory \$wd/result --input ${output}_tpm_gene_count.csv --separator , --output ${output}_tpm_result.png"
+        python pca_analysis.py --directory $dir/result --input ${output}_tpm_gene_count.csv --separator , --output ${output}_tpm_result.png
 
         echo $(date "+%Y-%m-%d %H:%M:%S") "principal component analysis finished"
     else
