@@ -38,7 +38,7 @@ Run script: `bash TEcount.sh -p ${num_threads} -d /run_directory -r mm39` <br>
 packages: python (v3.10), numpy (v1.26.4), pandas (v2.2.2), scikit-learn (v1.5.1), matplotlib (v3.8.4), adjustText (v0.7.3). <br>
 
 - script run <br>
-Provide infile and outfile filename and run the cell. <br>
+Input infile and outfile filename and run the cell. <br>
 
 
 ## 4. PCA-3D
