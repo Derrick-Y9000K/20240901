@@ -62,7 +62,7 @@ Run script: `bash cutandtag_mm39.sh` <br>
 ## 6. DNA methylation
 - environment construction <br>
 Use anaconda to create a new environment with python=2.7. <br>
-Install fastqc (v0.11.9) and multiqc (v1.13) via anaconda if necessary. <br>
+Install fastqc (v0.11.9), multiqc (v1.13) and trim_galore (v0.6.6) via anaconda if necessary. <br>
 Install samtools (v1.13) via anaconda. <br>
 Install BSseeker2 (v2.1.8) and CGmaptools (v0.1.2) from github (git://github.com/BSSeeker/BSseeker2.git, git://github.com/guoweilong/cgmaptools.git). <br>
 
