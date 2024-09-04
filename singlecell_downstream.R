@@ -1,8 +1,11 @@
 directory = '/path/to/expression/matrix/'
 setwd(directory)
 
+# ggplot2 v3.4.2
 library(ggplot2)
+# dplyr v1.1.2
 library(dplyr)
+# Seurat v4.3.0.1
 library(Seurat)
 
 scdata <- Read10X(data.dir = './data')
@@ -62,10 +65,11 @@ expr_level <- AverageExpression(subset(scdata, features = gene$gene))
 write.csv(expr_level, 'expression_level.csv')
 
 
+# tidyr v1.3.0
 library(tidyr)
+# paletteer v1.6.0
 library(paletteer)
-# library(gridExtra)
-# library(ggpubr)
+
 target <- read.csv('gene_violin.csv', header = FALSE, col.names = c("gene"))
 vln.df <- subset(scdata, features = target$gene)@assays$RNA@scale.data %>%
   t() %>%

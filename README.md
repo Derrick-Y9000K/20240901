@@ -77,7 +77,7 @@ Run script: `bash call_methylation.sh -p ${num_threads} -d /run_directory -r mm3
 ## 7. scRNA-seq
 - environment construction <br>
 Install cellranger (v7.2.0) from official website (https://support.10xgenomics.com/single-cell-gene-expression/software/overview/welcome). <br>
-packages: ggplot2 (), dplyr (), Seurat (), tidyr (), paletteer (). <br>
+packages: ggplot2 (v3.4.2), dplyr (v1.1.2), Seurat (v4.3.0.1), tidyr (v1.3.0), paletteer (v1.6.0). <br>
 
 - script run <br>
 Place all raw sequencing files under /run_directory/data and `cd /run_directory`. <br>
