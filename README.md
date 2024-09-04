@@ -80,7 +80,7 @@ Install cellranger (v7.2.0) from official website (https://support.10xgenomics.c
 packages: ggplot2 (), dplyr (), Seurat (), tidyr (), paletteer (). <br>
 
 - script run <br>
-Place all raw sequencing files under /run_directory/data and cd /run_directory. <br>
-Rename all the files in [sample Name]_S1_L00[Lane Number]_[Read Type]_001.fastq.gz format. <br>
+Place all raw sequencing files under /run_directory/data and `cd /run_directory`. <br>
+Rename all the files in `[sample Name]_S1_L00[Lane Number]_[Read Type]_001.fastq.gz` format. <br>
 Run upstream analysis: `cellranger count --id=$sample --localcores=16 --transcriptome=$db --fastqs=./data --sample=$sample --nosecondary --expect-cells=5000` <br>
 Run downstream analysis: use ${sample}/outs/filtered_feature_bc_matrix/ to conduct downstream analysis with singlecell_downstream.R. <br>
