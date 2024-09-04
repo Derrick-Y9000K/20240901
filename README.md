@@ -19,7 +19,7 @@ Use hisat2-build to build reference index under /path/to/reference. <br>
 
 ## script run
 Place all raw sequencing files under /run_directory/fastq. <br>
-Run script: bash RNAseq.sh -p ${num_threads} -d /run_directory -r mm39 <br>
+Run script: `bash RNAseq.sh -p ${num_threads} -d /run_directory -r mm39` <br>
 
 
 # 2. RNA-TE
