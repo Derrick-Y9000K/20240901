@@ -44,7 +44,7 @@ Input infile and outfile filename and run the cell. <br>
 The expression matrix is z-score normalized and then dimensionality reduced by PCA, followed visualization by matplotlib (2D) or pyeharts (3D). <br>
 
 
-## 4. ATAC-seq/CUTtag
+## 4. ATAC-seq/CUT&Tag
 - environment construction <br>
 Install trim_galore (v0.6.6) and bowtie2 (v2.4.4) via apt. <br>
 Install samtools (v1.13), bamCoverage (v3.5.4) and macs2 (v2.2.9.1) via anaconda. <br>
