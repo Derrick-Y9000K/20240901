@@ -417,7 +417,7 @@ if [ -d $dir ]; then
 		for file in `ls $dir/methylation | sort`; do
 			if [[ $file == *.CGmap.gz ]]; then
 				read -u 8 -n 1; {
-					echo $(date "+%Y-%m-%d %H:%M:%S") "Running: CGmapMethInBins -i $dir/methylation/$file -B $bin_size -c 1  -p $dir/average/${file%.CGmap.gz*}. >$dir/average/${file%.CGmap.gz*}.average 2>&1 &"
+					echo $(date "+%Y-%m-%d %H:%M:%S") "Running: CGmapMethInBins -i $dir/methylation/$file -B $bin_size -c 1 -p $dir/average/${file%.CGmap.gz*}. >$dir/average/${file%.CGmap.gz*}.average 2>&1 &"
 					CGmapMethInBins -i $dir/methylation/$file -B $bin_size -c 1 -p $dir/average/${file%.CGmap.gz*}. >$dir/average/${file%.CGmap.gz*}.average 2>&1
 					echo -n "p" >&8
 				} &

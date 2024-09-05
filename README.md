@@ -35,17 +35,16 @@ Run script: `bash TEcount.sh -p ${num_threads} -d /run_directory -r mm39` <br>
 
 ## 3. PCA
 - environment construction <br>
-packages: python (v3.10), numpy (v1.26.4), pandas (v2.2.2), scikit-learn (v1.5.1), matplotlib (v3.8.4), adjustText (v0.7.3). <br>
+packages: python (v3.10), numpy (v1.26.4), pandas (v2.2.2), scikit-learn (v1.5.1), matplotlib (v3.8.4), adjustText (v0.7.3), pyeharts (v2.0.0). <br>
 
 - script run <br>
 Input infile and outfile filename and run the cell. <br>
 
+- script description <br>
+The expression matrix is z-score normalized and then dimensionality reduced by PCA, followed visualization by matplotlib (2D) or pyeharts (3D). <br>
 
-## 4. PCA-3D
-- to do <br>
 
-
-## 5. ATAC-seq/CUTtag
+## 4. ATAC-seq/CUTtag
 - environment construction <br>
 Install trim_galore (v0.6.6) and bowtie2 (v2.4.4) via apt. <br>
 Install samtools (v1.13), bamCoverage (v3.5.4) and macs2 (v2.2.9.1) via anaconda. <br>
@@ -59,7 +58,7 @@ Place raw sequencing files of each sample under separate directory. <br>
 Run script: `bash cutandtag_mm39.sh` <br>
 
 
-## 6. DNA methylation
+## 5. DNA methylation
 - environment construction <br>
 Use anaconda to create a new environment with python=2.7. <br>
 Install fastqc (v0.11.9), multiqc (v1.13) and trim_galore (v0.6.6) via anaconda if necessary. <br>
@@ -74,7 +73,7 @@ Place all raw sequencing files under /run_directory/fastq. <br>
 Run script: `bash call_methylation.sh -p ${num_threads} -d /run_directory -r mm39 -b 500` <br>
 
 
-## 7. scRNA-seq
+## 6. scRNA-seq
 - environment construction <br>
 Install cellranger (v7.2.0) from official website (https://support.10xgenomics.com/single-cell-gene-expression/software/overview/welcome). <br>
 packages: ggplot2 (v3.4.2), dplyr (v1.1.2), Seurat (v4.3.0.1), tidyr (v1.3.0), paletteer (v1.6.0). <br>
