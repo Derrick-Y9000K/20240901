@@ -11,7 +11,7 @@ thread=32
 block_size=16000000
 bin_size=100000
 refdir="/path/to/reference"
-tmpdir="/tmp"
+tmpdir="/path/to/tmpdir"
 fifo="multithread_processing"
 
 while getopts "d:f:r:s:qtgp:b:z:x:" params; do
